@@ -458,10 +458,12 @@ static int myvivi_probe(struct platform_device *pdev) {
 	vfd->ioctl_ops = &myvivi_ioctl_ops;
 	vfd->device_caps = myvivi->vid_cap_caps;
 	vfd->release = video_device_release_empty;
-	vfd->v4l2_dev = &myvivi->v4l2_dev;
+	vfd->v4l2_dev = &myvivi->v4l2_dev; //初始化v4l2 dev 结构
 	vfd->queue = &myvivi->vb_vid_cap_q;
 	vfd->lock = &myvivi->mutex;
 	video_set_drvdata(vfd, myvivi);
+
+	//注册video_device
 	ret = video_register_device(vfd, VFL_TYPE_GRABBER, -1);
 	if (ret < 0)
 		goto unreg_dev;
