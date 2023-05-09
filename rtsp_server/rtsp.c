@@ -13,6 +13,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <time.h>
+#include <unistd.h>
 
 #define SERVER_PORT     8554
 #define SERVER_RTP_PORT  55532
@@ -127,7 +128,7 @@ static int handleCmd_DESCRIBE(char* result, int cseq, char* url)
     sprintf(result, "RTSP/1.0 200 OK\r\nCSeq: %d\r\n"
                     "Content-Base: %s\r\n"
                     "Content-type: application/sdp\r\n"
-                    "Content-length: %d\r\n\r\n"
+                    "Content-length: %ld\r\n\r\n"
                     "%s",
                     cseq,
                     url,
